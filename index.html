@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<!-- saved from url=(0067)file:///C:/Users/Yass/Downloads/Airplane_Database_Presentation.html -->
-<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Airline Management System | Database Design Project</title>
   <!-- QR Code Library -->
-  <script src="./Airline Management System _ Database Design Project_files/qrcode.min.js.download"></script>
+  <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&family=Space+Mono:wght@400;700&family=Inter:wght@300;400;500&display=swap');
 
@@ -352,21 +352,21 @@
 <div class="nav">
   <div class="nav-logo">✈ AMS·DB</div>
   <div class="nav-links">
-    <a onclick="document.getElementById(&#39;s-team&#39;).scrollIntoView({behavior:&#39;smooth&#39;})">Crew</a>
-    <a onclick="document.getElementById(&#39;s-domain&#39;).scrollIntoView({behavior:&#39;smooth&#39;})">Domain</a>
-    <a onclick="document.getElementById(&#39;s-entities&#39;).scrollIntoView({behavior:&#39;smooth&#39;})">Entities</a>
-    <a onclick="document.getElementById(&#39;s-relationships&#39;).scrollIntoView({behavior:&#39;smooth&#39;})">Relations</a>
-    <a onclick="document.getElementById(&#39;s-normalization&#39;).scrollIntoView({behavior:&#39;smooth&#39;})">3NF</a>
-    <a onclick="document.getElementById(&#39;s-conclusion&#39;).scrollIntoView({behavior:&#39;smooth&#39;})">Conclusion</a>
+    <a onclick="document.getElementById('s-team').scrollIntoView({behavior:'smooth'})">Crew</a>
+    <a onclick="document.getElementById('s-domain').scrollIntoView({behavior:'smooth'})">Domain</a>
+    <a onclick="document.getElementById('s-entities').scrollIntoView({behavior:'smooth'})">Entities</a>
+    <a onclick="document.getElementById('s-relationships').scrollIntoView({behavior:'smooth'})">Relations</a>
+    <a onclick="document.getElementById('s-normalization').scrollIntoView({behavior:'smooth'})">3NF</a>
+    <a onclick="document.getElementById('s-conclusion').scrollIntoView({behavior:'smooth'})">Conclusion</a>
   </div>
 </div>
 
 <!-- ==================== HERO SECTION ==================== -->
 <section class="hero">
   <svg class="plane-overlay" width="600" height="600" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M10 50 L80 20 L75 48 L90 50 L75 52 L80 80 L10 50Z" fill="white"></path>
-    <path d="M30 48 L55 38 L55 48Z" fill="white"></path>
-    <path d="M30 52 L55 62 L55 52Z" fill="white"></path>
+    <path d="M10 50 L80 20 L75 48 L90 50 L75 52 L80 80 L10 50Z" fill="white"/>
+    <path d="M30 48 L55 38 L55 48Z" fill="white"/>
+    <path d="M30 52 L55 62 L55 52Z" fill="white"/>
   </svg>
 
   <div class="hero-tag">Database Design Project · 2025/2026</div>
@@ -379,9 +379,9 @@
     <div class="hero-meta-item"><span class="hero-meta-label">Instructor</span><span class="hero-meta-value">Dr. Bouslama</span></div>
   </div>
 
-  <!-- QR CODE: will generate for current page URL -->
+  <!-- QR CODE - HARDCODED TO GITHUB PAGES URL -->
   <div class="hero-qr">
-    <div id="qrcode" title="file:///C:/Users/Yass/Downloads/Airplane_Database_Presentation.html"><canvas width="100" height="100" style="display: none;"></canvas><img src="data:image/png;base64,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" style="display: block;"></div>
+    <div id="qrcode"></div>
     <div class="hero-qr-label">Scan to open on your phone</div>
   </div>
 </section>
@@ -391,12 +391,12 @@
 
 <!-- TEAM SECTION -->
 <section id="s-team" style="min-height: auto; padding-top: 80px; padding-bottom: 60px;">
-  <div class="fadein visible">
+  <div class="fadein">
     <div class="sec-label">01 · The Crew</div>
     <div class="sec-title">Meet the <span>Team</span></div>
     <div class="team-row">
-      <div class="team-card"><div class="team-avatar">NS</div><div class="team-name">Nour Soussi</div><div class="team-role">Student</div></div>
-      <div class="team-card"><div class="team-avatar">YH</div><div class="team-name">Yassine Helel</div><div class="team-role">Student</div></div>
+      <div class="team-card"><div class="team-avatar">NS</div><div class="team-name">Nour Soussi</div><div class="team-role">Database Designer</div></div>
+      <div class="team-card"><div class="team-avatar">YH</div><div class="team-name">Yassine Helel</div><div class="team-role">Database Designer</div></div>
       <div class="team-card" style="background: rgba(0,200,255,0.04); border-color: rgba(0,200,255,0.3);">
         <div class="team-avatar" style="background: linear-gradient(135deg,rgba(255,209,102,0.3),rgba(0,200,255,0.3)); border-color:rgba(255,209,102,0.5);">RB</div>
         <div class="team-name">Dr. Rihab Bouslama</div><div class="team-role">Instructor</div>
@@ -410,14 +410,14 @@
 
 <!-- DOMAIN SECTION -->
 <section id="s-domain" style="min-height: auto; padding-top: 60px; padding-bottom: 40px;">
-  <div class="fadein visible">
+  <div class="fadein">
     <div class="sec-label">02 · Domain Selection</div>
     <div class="sec-title">Why <span>Airlines?</span></div>
     <div class="cards">
       <div class="card"><div class="card-icon">🗃️</div><div class="card-title">Rich Data Model</div><div class="card-text">Multiple interconnected entities with real-world complexity — perfect for practicing advanced modeling concepts.</div></div>
       <div class="card"><div class="card-icon">📐</div><div class="card-title">Advanced Concepts</div><div class="card-text">Covers ISA hierarchies (crew specialization), recursive relationships (crew supervision), and M:N junctions.</div></div>
       <div class="card"><div class="card-icon">🛫</div><div class="card-title">Real Business Rules</div><div class="card-text">Clear, verifiable constraints: every flight needs crew, seats belong to aircraft, bookings generate payments.</div></div>
-      <div class="card"><div class="card-icon">🏆</div><div class="card-title">Loyalty &amp; Commerce</div><div class="card-text">Includes full reward system, promotional codes, and multi-payment booking support.</div></div>
+      <div class="card"><div class="card-icon">🏆</div><div class="card-title">Loyalty & Commerce</div><div class="card-text">Includes full reward system, promotional codes, and multi-payment booking support.</div></div>
     </div>
   </div>
 </section>
@@ -427,7 +427,7 @@
 
 <!-- ENTITIES SECTION -->
 <section id="s-entities" style="padding-top: 60px; padding-bottom: 40px;">
-  <div class="fadein visible">
+  <div class="fadein">
     <div class="sec-label">03 · Conceptual Design</div>
     <div class="sec-title">Key <span>Entities</span></div>
     <div class="stats-row">
@@ -452,7 +452,7 @@
 
 <!-- RELATIONSHIPS SECTION -->
 <section id="s-relationships" style="padding-top: 60px; padding-bottom: 40px;">
-  <div class="fadein visible">
+  <div class="fadein">
     <div class="sec-label">04 · Logical Design</div>
     <div class="sec-title">Key <span>Relationships</span></div>
     <div class="rel-list">
@@ -474,11 +474,11 @@
 
 <!-- NORMALIZATION SECTION -->
 <section id="s-normalization" style="padding-top: 60px; padding-bottom: 40px;">
-  <div class="fadein visible">
+  <div class="fadein">
     <div class="sec-label">05 · Normalization</div>
     <div class="sec-title">Verified up to <span>3NF</span></div>
     <div class="nf-steps">
-      <div class="nf-step"><div class="nf-badge">1NF</div><div class="nf-step-content"><div class="nf-step-title">First Normal Form — Atomic Values</div><div class="nf-step-text">Two violations found: <code style="color:var(--accent2)">languages</code> in FLIGHT_ATTENDANT and <code style="color:var(--accent2)">nationality</code> in PASSENGER could hold multiple values.</div><span class="nf-tag">Violation: multi-valued attributes</span><span class="nf-tag fixed">Fixed: FLIGHT_ATTENDANT_LANGUAGE &amp; PASSENGER_NATIONALITY tables</span></div></div>
+      <div class="nf-step"><div class="nf-badge">1NF</div><div class="nf-step-content"><div class="nf-step-title">First Normal Form — Atomic Values</div><div class="nf-step-text">Two violations found: <code style="color:var(--accent2)">languages</code> in FLIGHT_ATTENDANT and <code style="color:var(--accent2)">nationality</code> in PASSENGER could hold multiple values.</div><span class="nf-tag">Violation: multi-valued attributes</span><span class="nf-tag fixed">Fixed: FLIGHT_ATTENDANT_LANGUAGE & PASSENGER_NATIONALITY tables</span></div></div>
       <div class="nf-step ok"><div class="nf-badge">2NF</div><div class="nf-step-content"><div class="nf-step-title">Second Normal Form — No Partial Dependencies</div><div class="nf-step-text">All non-key attributes depend on the full composite key in every table. No violations found.</div><span class="nf-tag fixed">✓ Already satisfied</span></div></div>
       <div class="nf-step"><div class="nf-badge">3NF</div><div class="nf-step-content"><div class="nf-step-title">Third Normal Form — No Transitive Dependencies</div><div class="nf-step-text">Three issues resolved: <code style="color:var(--accent2)">payment_status</code> removed from BOOKING (moved to PAYMENT). AIRCRAFT split to isolate model attributes. LOYALTY_ACCOUNT tier logic extracted into LOYALTY_TIER table.</div><span class="nf-tag">3 transitive dependencies removed</span><span class="nf-tag fixed">Fixed: AIRCRAFT_MODEL, LOYALTY_TIER, PAYMENT restructured</span></div></div>
     </div>
@@ -496,7 +496,7 @@
     <div class="conclusion-cards">
       <div class="conclusion-card">
         <div class="emoji">🗄️</div>
-        <h3>Clean &amp; Normalized</h3>
+        <h3>Clean & Normalized</h3>
         <p>Our database follows 3NF rules. No duplicate data, no update problems. Everything is stored once in the right place.</p>
       </div>
       <div class="conclusion-card">
@@ -511,7 +511,7 @@
       </div>
     </div>
     <p style="text-align: center; margin-top: 40px; font-size: 14px; color: var(--accent); border-top: 1px dashed rgba(0,200,255,0.3); padding-top: 30px;">
-      ✈ Thank you for your attention ✈
+      ✈ Thank you for your attention — any questions? ✈
     </p>
   </div>
 </section>
@@ -525,9 +525,9 @@
 </div>
 
 <script>
-  // Generate QR code for the current page URL (dynamic)
+  // QR code manually set to your GitHub Pages URL
   new QRCode(document.getElementById("qrcode"), {
-    text: window.location.href,
+    text: "https://yassc-p.github.io",
     width: 100,
     height: 100,
     colorDark: "#00c8ff",
@@ -542,5 +542,5 @@
   document.querySelectorAll('.fadein').forEach(el => observer.observe(el));
 </script>
 
-
-</body></html>
+</body>
+</html>
