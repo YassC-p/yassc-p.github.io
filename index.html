@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<!-- saved from url=(0067)file:///C:/Users/Yass/Downloads/Airplane_Database_Presentation.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Airline Management System | Database Design Project</title>
+  <!-- QR Code Library -->
+  <script src="./Airline Management System _ Database Design Project_files/qrcode.min.js.download"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&family=Space+Mono:wght@400;700&family=Inter:wght@300;400;500&display=swap');
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --sky: #0a0f1e;
+      --sky2: #0d1a2e;
+      --accent: #00c8ff;
+      --accent2: #ff6b35;
+      --gold: #ffd166;
+      --white: #e8f4ff;
+      --muted: #7aa0c0;
+      --card-bg: rgba(255,255,255,0.04);
+      --card-border: rgba(0,200,255,0.18);
+    }
+
+    body {
+      background: var(--sky);
+      color: var(--white);
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+    }
+
+    /* ---- STARS BACKGROUND ---- */
+    .stars {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0;
+      background:
+        radial-gradient(1px 1px at 10% 15%, rgba(255,255,255,0.6) 0%, transparent 100%),
+        radial-gradient(1px 1px at 25% 40%, rgba(255,255,255,0.4) 0%, transparent 100%),
+        radial-gradient(1.5px 1.5px at 40% 8%, rgba(0,200,255,0.5) 0%, transparent 100%),
+        radial-gradient(1px 1px at 60% 30%, rgba(255,255,255,0.5) 0%, transparent 100%),
+        radial-gradient(1px 1px at 75% 55%, rgba(255,255,255,0.3) 0%, transparent 100%),
+        radial-gradient(1.5px 1.5px at 85% 10%, rgba(255,209,102,0.5) 0%, transparent 100%),
+        radial-gradient(1px 1px at 90% 70%, rgba(255,255,255,0.4) 0%, transparent 100%),
+        radial-gradient(1px 1px at 15% 80%, rgba(255,255,255,0.3) 0%, transparent 100%),
+        radial-gradient(1px 1px at 50% 65%, rgba(0,200,255,0.3) 0%, transparent 100%),
+        radial-gradient(1px 1px at 35% 90%, rgba(255,255,255,0.4) 0%, transparent 100%);
+    }
+
+    /* ---- NAV / HEADER ---- */
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 40px;
+      background: rgba(10,15,30,0.85);
+      border-bottom: 1px solid rgba(0,200,255,0.15);
+      backdrop-filter: blur(12px);
+    }
+    .nav-logo {
+      font-family: 'Rajdhani', sans-serif; font-size: 18px; font-weight: 700;
+      color: var(--accent); letter-spacing: 3px; text-transform: uppercase;
+    }
+    .nav-links { display: flex; gap: 28px; }
+    .nav-links a {
+      font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
+      color: var(--muted); text-decoration: none; cursor: pointer;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--accent); }
+
+    /* ---- SECTIONS ---- */
+    section {
+      position: relative; z-index: 1;
+      min-height: 100vh;
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 100px 40px 60px;
+      max-width: 1100px; margin: 0 auto;
+    }
+
+    /* ---- HERO ---- */
+    .hero {
+      align-items: flex-start;
+      padding-top: 140px;
+      min-height: 100vh;
+      position: relative;
+    }
+    .hero-tag {
+      font-family: 'Space Mono', monospace; font-size: 11px;
+      color: var(--accent); letter-spacing: 3px; text-transform: uppercase;
+      margin-bottom: 24px; display: flex; align-items: center; gap: 10px;
+    }
+    .hero-tag::before {
+      content: ''; display: block; width: 30px; height: 1px; background: var(--accent);
+    }
+    .hero-title {
+      font-family: 'Rajdhani', sans-serif; font-size: clamp(48px, 8vw, 88px);
+      font-weight: 700; line-height: 0.95; letter-spacing: -1px;
+      margin-bottom: 24px;
+    }
+    .hero-title span { color: var(--accent); }
+    .hero-subtitle {
+      font-size: 14px; color: var(--muted); line-height: 1.8; max-width: 480px;
+      margin-bottom: 48px; letter-spacing: 0.3px;
+    }
+    .hero-meta {
+      display: flex; gap: 40px; flex-wrap: wrap;
+      margin-bottom: 0;
+    }
+    .hero-meta-item { display: flex; flex-direction: column; gap: 4px; }
+    .hero-meta-label { font-size: 10px; letter-spacing: 2px; color: var(--muted); text-transform: uppercase; }
+    .hero-meta-value { font-family: 'Rajdhani', sans-serif; font-size: 18px; font-weight: 600; color: var(--white); }
+
+    /* QR Code styling */
+    .hero-qr {
+      position: absolute;
+      right: 40px;
+      top: 50%;
+      transform: translateY(-50%);
+      text-align: center;
+      background: rgba(0,0,0,0.3);
+      backdrop-filter: blur(8px);
+      padding: 12px;
+      border-radius: 16px;
+      border: 1px solid rgba(0,200,255,0.3);
+      transition: transform 0.2s;
+    }
+    .hero-qr:hover {
+      transform: translateY(-50%) scale(1.02);
+      border-color: var(--accent);
+    }
+    .hero-qr-label {
+      font-size: 10px;
+      margin-top: 8px;
+      letter-spacing: 1px;
+      color: var(--muted);
+      font-family: 'Space Mono', monospace;
+    }
+    #qrcode canvas, #qrcode img {
+      display: block;
+      margin: 0 auto;
+      border-radius: 8px;
+    }
+
+    /* big airplane SVG overlay */
+    .plane-overlay {
+      position: absolute; right: -20px; top: 50%; transform: translateY(-55%) rotate(-8deg);
+      opacity: 0.07; pointer-events: none; z-index: 0;
+    }
+
+    /* ---- RUNWAY DIVIDER (shared) ---- */
+    .runway {
+      position: relative; z-index: 1;
+      display: flex; align-items: center; gap: 16px;
+      padding: 0 40px; max-width: 1100px; margin: 40px auto 40px;
+    }
+    .runway-line {
+      flex: 1; height: 1px;
+      background: repeating-linear-gradient(90deg, var(--accent) 0, var(--accent) 18px, transparent 18px, transparent 30px);
+      opacity: 0.3;
+    }
+    .runway-icon { color: var(--accent); font-size: 22px; opacity: 0.6; }
+
+    /* ---- SECTION HEADER ---- */
+    .sec-label {
+      font-family: 'Space Mono', monospace; font-size: 10px;
+      color: var(--accent2); letter-spacing: 3px; text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .sec-title {
+      font-family: 'Rajdhani', sans-serif; font-size: clamp(30px, 5vw, 52px);
+      font-weight: 700; margin-bottom: 40px; line-height: 1.05;
+    }
+    .sec-title span { color: var(--accent); }
+
+    /* ---- CARDS GRID ---- */
+    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 24px 20px;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .card:hover { border-color: var(--accent); background: rgba(0,200,255,0.06); }
+    .card-icon { font-size: 26px; margin-bottom: 14px; }
+    .card-title { font-family: 'Rajdhani', sans-serif; font-size: 17px; font-weight: 600; margin-bottom: 8px; color: var(--white); }
+    .card-text { font-size: 12px; color: var(--muted); line-height: 1.7; }
+
+    /* ---- ENTITY LIST ---- */
+    .entity-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 10px; }
+    .entity-pill {
+      background: rgba(0,200,255,0.06);
+      border: 1px solid rgba(0,200,255,0.2);
+      border-radius: 8px; padding: 12px 16px;
+      font-family: 'Space Mono', monospace; font-size: 11px;
+      color: var(--accent); letter-spacing: 1px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .entity-pill::before { content: '#'; color: var(--muted); }
+    .entity-pill.highlight { background: rgba(255,107,53,0.08); border-color: rgba(255,107,53,0.3); color: var(--accent2); }
+
+    /* ---- NORMALIZATION STEPS ---- */
+    .nf-steps { display: flex; flex-direction: column; gap: 16px; }
+    .nf-step {
+      display: flex; gap: 20px; align-items: flex-start;
+      background: var(--card-bg); border: 1px solid var(--card-border);
+      border-radius: 12px; padding: 20px 24px;
+    }
+    .nf-badge {
+      flex-shrink: 0; width: 48px; height: 48px; border-radius: 50%;
+      border: 2px solid var(--accent);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Rajdhani', sans-serif; font-size: 15px; font-weight: 700;
+      color: var(--accent);
+    }
+    .nf-step.ok .nf-badge { border-color: #4ade80; color: #4ade80; }
+    .nf-step-content {}
+    .nf-step-title { font-family: 'Rajdhani', sans-serif; font-size: 18px; font-weight: 600; margin-bottom: 6px; }
+    .nf-step-text { font-size: 13px; color: var(--muted); line-height: 1.7; }
+    .nf-tag {
+      display: inline-block; margin-top: 8px; padding: 3px 10px;
+      border-radius: 4px; font-size: 11px; font-family: 'Space Mono', monospace;
+      background: rgba(255,107,53,0.15); color: var(--accent2);
+      border: 1px solid rgba(255,107,53,0.3);
+    }
+    .nf-tag.fixed { background: rgba(74,222,128,0.1); color: #4ade80; border-color: rgba(74,222,128,0.3); }
+
+    /* ---- STATS ROW ---- */
+    .stats-row { display: flex; flex-wrap: wrap; gap: 20px; margin-bottom: 40px; }
+    .stat-box {
+      background: var(--card-bg); border: 1px solid var(--card-border);
+      border-radius: 10px; padding: 18px 24px; text-align: center; flex: 1; min-width: 120px;
+    }
+    .stat-num {
+      font-family: 'Rajdhani', sans-serif; font-size: 38px; font-weight: 700; color: var(--accent);
+      line-height: 1;
+    }
+    .stat-label { font-size: 11px; letter-spacing: 1.5px; color: var(--muted); text-transform: uppercase; margin-top: 4px; }
+
+    /* ---- RELATIONSHIP TABLE ---- */
+    .rel-list { display: flex; flex-direction: column; gap: 10px; }
+    .rel-row {
+      display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+      padding: 12px 16px; background: var(--card-bg);
+      border: 1px solid var(--card-border); border-radius: 8px;
+      font-size: 13px;
+    }
+    .rel-entity {
+      font-family: 'Space Mono', monospace; font-size: 11px;
+      color: var(--accent); background: rgba(0,200,255,0.08);
+      border: 1px solid rgba(0,200,255,0.2); border-radius: 4px; padding: 3px 8px;
+    }
+    .rel-arrow { color: var(--muted); font-size: 15px; }
+    .rel-card { font-size: 11px; color: var(--gold); font-family: 'Space Mono', monospace; }
+    .rel-desc { color: var(--muted); font-size: 12px; margin-left: auto; }
+
+    /* ---- TEAM SECTION (CREW) ---- */
+    .team-row { display: flex; gap: 20px; flex-wrap: wrap; }
+    .team-card {
+      flex: 1; min-width: 180px; background: var(--card-bg);
+      border: 1px solid var(--card-border); border-radius: 14px;
+      padding: 28px 24px; text-align: center;
+    }
+    .team-avatar {
+      width: 60px; height: 60px; border-radius: 50%;
+      background: linear-gradient(135deg, rgba(0,200,255,0.3), rgba(255,107,53,0.3));
+      border: 2px solid rgba(0,200,255,0.4);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Rajdhani', sans-serif; font-size: 22px; font-weight: 700;
+      color: var(--white); margin: 0 auto 14px;
+    }
+    .team-name { font-family: 'Rajdhani', sans-serif; font-size: 20px; font-weight: 600; margin-bottom: 4px; }
+    .team-role { font-size: 11px; color: var(--muted); letter-spacing: 1.5px; text-transform: uppercase; }
+
+    /* ---- CONCLUSION SECTION ---- */
+    .conclusion-cards {
+      display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;
+    }
+    .conclusion-card {
+      background: rgba(0,200,255,0.03);
+      border: 1px solid var(--accent);
+      border-radius: 20px;
+      padding: 24px 28px;
+      flex: 1;
+      min-width: 200px;
+      text-align: center;
+      backdrop-filter: blur(4px);
+    }
+    .conclusion-card .emoji {
+      font-size: 42px;
+      margin-bottom: 16px;
+    }
+    .conclusion-card h3 {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 20px;
+      margin-bottom: 12px;
+      color: var(--accent);
+    }
+    .conclusion-card p {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* ---- FOOTER ---- */
+    .footer-bar {
+      position: relative; z-index: 1;
+      text-align: center; padding: 30px 40px 40px;
+      color: var(--muted); font-size: 12px; letter-spacing: 1px;
+      border-top: 1px solid rgba(0,200,255,0.1);
+    }
+
+    /* Animations */
+    @keyframes float { 0%,100%{transform:translateY(-55%) rotate(-8deg) translateX(0)} 50%{transform:translateY(-55%) rotate(-8deg) translateX(12px)} }
+    .plane-overlay { animation: float 6s ease-in-out infinite; }
+
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+    .blink { animation: blink 2s ease-in-out infinite; }
+
+    /* Scroll fade-in */
+    .fadein { opacity: 0; transform: translateY(28px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .fadein.visible { opacity: 1; transform: translateY(0); }
+
+    /* Responsive: hide or reposition QR on smaller screens */
+    @media (max-width: 900px) {
+      .hero-qr {
+        position: static;
+        transform: none;
+        margin-top: 30px;
+        display: inline-block;
+        width: fit-content;
+      }
+      .hero {
+        align-items: center;
+        text-align: center;
+      }
+      .hero-meta {
+        justify-content: center;
+      }
+      .hero-subtitle {
+        margin-left: auto;
+        margin-right: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="stars"></div>
+
+<!-- NAVIGATION -->
+<div class="nav">
+  <div class="nav-logo">✈ AMS·DB</div>
+  <div class="nav-links">
+    <a onclick="document.getElementById(&#39;s-team&#39;).scrollIntoView({behavior:&#39;smooth&#39;})">Crew</a>
+    <a onclick="document.getElementById(&#39;s-domain&#39;).scrollIntoView({behavior:&#39;smooth&#39;})">Domain</a>
+    <a onclick="document.getElementById(&#39;s-entities&#39;).scrollIntoView({behavior:&#39;smooth&#39;})">Entities</a>
+    <a onclick="document.getElementById(&#39;s-relationships&#39;).scrollIntoView({behavior:&#39;smooth&#39;})">Relations</a>
+    <a onclick="document.getElementById(&#39;s-normalization&#39;).scrollIntoView({behavior:&#39;smooth&#39;})">3NF</a>
+    <a onclick="document.getElementById(&#39;s-conclusion&#39;).scrollIntoView({behavior:&#39;smooth&#39;})">Conclusion</a>
+  </div>
+</div>
+
+<!-- ==================== HERO SECTION ==================== -->
+<section class="hero">
+  <svg class="plane-overlay" width="600" height="600" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M10 50 L80 20 L75 48 L90 50 L75 52 L80 80 L10 50Z" fill="white"></path>
+    <path d="M30 48 L55 38 L55 48Z" fill="white"></path>
+    <path d="M30 52 L55 62 L55 52Z" fill="white"></path>
+  </svg>
+
+  <div class="hero-tag">Database Design Project · 2025/2026</div>
+  <h1 class="hero-title">Airline<br><span>Management</span><br>System</h1>
+  <p class="hero-subtitle">A complete relational database design covering flight scheduling, crew management, passenger bookings, loyalty programs, and more — normalized to 3NF.</p>
+  <div class="hero-meta">
+    <div class="hero-meta-item"><span class="hero-meta-label">Domain</span><span class="hero-meta-value">Airline Industry</span></div>
+    <div class="hero-meta-item"><span class="hero-meta-label">Tables</span><span class="hero-meta-value">20+ Relations</span></div>
+    <div class="hero-meta-item"><span class="hero-meta-label">Normal Form</span><span class="hero-meta-value">3NF Verified</span></div>
+    <div class="hero-meta-item"><span class="hero-meta-label">Instructor</span><span class="hero-meta-value">Dr. Bouslama</span></div>
+  </div>
+
+  <!-- QR CODE: will generate for current page URL -->
+  <div class="hero-qr">
+    <div id="qrcode" title="file:///C:/Users/Yass/Downloads/Airplane_Database_Presentation.html"><canvas width="100" height="100" style="display: none;"></canvas><img src="data:image/png;base64,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" style="display: block;"></div>
+    <div class="hero-qr-label">Scan to open on your phone</div>
+  </div>
+</section>
+
+<!-- RUNWAY DIVIDER -->
+<div class="runway"><div class="runway-line"></div><span class="runway-icon">✈</span><div class="runway-line"></div></div>
+
+<!-- TEAM SECTION -->
+<section id="s-team" style="min-height: auto; padding-top: 80px; padding-bottom: 60px;">
+  <div class="fadein visible">
+    <div class="sec-label">01 · The Crew</div>
+    <div class="sec-title">Meet the <span>Team</span></div>
+    <div class="team-row">
+      <div class="team-card"><div class="team-avatar">NS</div><div class="team-name">Nour Soussi</div><div class="team-role">Student</div></div>
+      <div class="team-card"><div class="team-avatar">YH</div><div class="team-name">Yassine Helel</div><div class="team-role">Student</div></div>
+      <div class="team-card" style="background: rgba(0,200,255,0.04); border-color: rgba(0,200,255,0.3);">
+        <div class="team-avatar" style="background: linear-gradient(135deg,rgba(255,209,102,0.3),rgba(0,200,255,0.3)); border-color:rgba(255,209,102,0.5);">RB</div>
+        <div class="team-name">Dr. Rihab Bouslama</div><div class="team-role">Instructor</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RUNWAY DIVIDER -->
+<div class="runway"><div class="runway-line"></div><span class="runway-icon">✈</span><div class="runway-line"></div></div>
+
+<!-- DOMAIN SECTION -->
+<section id="s-domain" style="min-height: auto; padding-top: 60px; padding-bottom: 40px;">
+  <div class="fadein visible">
+    <div class="sec-label">02 · Domain Selection</div>
+    <div class="sec-title">Why <span>Airlines?</span></div>
+    <div class="cards">
+      <div class="card"><div class="card-icon">🗃️</div><div class="card-title">Rich Data Model</div><div class="card-text">Multiple interconnected entities with real-world complexity — perfect for practicing advanced modeling concepts.</div></div>
+      <div class="card"><div class="card-icon">📐</div><div class="card-title">Advanced Concepts</div><div class="card-text">Covers ISA hierarchies (crew specialization), recursive relationships (crew supervision), and M:N junctions.</div></div>
+      <div class="card"><div class="card-icon">🛫</div><div class="card-title">Real Business Rules</div><div class="card-text">Clear, verifiable constraints: every flight needs crew, seats belong to aircraft, bookings generate payments.</div></div>
+      <div class="card"><div class="card-icon">🏆</div><div class="card-title">Loyalty &amp; Commerce</div><div class="card-text">Includes full reward system, promotional codes, and multi-payment booking support.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- RUNWAY DIVIDER -->
+<div class="runway"><div class="runway-line"></div><span class="runway-icon">✈</span><div class="runway-line"></div></div>
+
+<!-- ENTITIES SECTION -->
+<section id="s-entities" style="padding-top: 60px; padding-bottom: 40px;">
+  <div class="fadein visible">
+    <div class="sec-label">03 · Conceptual Design</div>
+    <div class="sec-title">Key <span>Entities</span></div>
+    <div class="stats-row">
+      <div class="stat-box"><div class="stat-num">20+</div><div class="stat-label">Tables</div></div>
+      <div class="stat-box"><div class="stat-num">3</div><div class="stat-label">ISA Hierarchies</div></div>
+      <div class="stat-box"><div class="stat-num">8</div><div class="stat-label">Subsystems</div></div>
+      <div class="stat-box"><div class="stat-num">2</div><div class="stat-label">Central Entities</div></div>
+    </div>
+    <div class="entity-grid">
+      <div class="entity-pill highlight">FLIGHT</div><div class="entity-pill highlight">BOOKING</div><div class="entity-pill">AIRLINE</div><div class="entity-pill">AIRPORT</div>
+      <div class="entity-pill">CITY</div><div class="entity-pill">ROUTE</div><div class="entity-pill">AIRCRAFT</div><div class="entity-pill">AIRCRAFT_MODEL</div>
+      <div class="entity-pill">SEAT</div><div class="entity-pill">GATE</div><div class="entity-pill">CREW_MEMBER</div><div class="entity-pill">PILOT</div>
+      <div class="entity-pill">FLIGHT_ATTENDANT</div><div class="entity-pill">PASSENGER</div><div class="entity-pill">TICKET</div><div class="entity-pill">PAYMENT</div>
+      <div class="entity-pill">BAGGAGE</div><div class="entity-pill">LOYALTY_ACCOUNT</div><div class="entity-pill">LOYALTY_TIER</div><div class="entity-pill">PROMOTION</div>
+      <div class="entity-pill">POINTS_TRANSACTION</div><div class="entity-pill">MAINTENANCE</div>
+    </div>
+  </div>
+</section>
+
+<!-- RUNWAY DIVIDER -->
+<div class="runway"><div class="runway-line"></div><span class="runway-icon">✈</span><div class="runway-line"></div></div>
+
+<!-- RELATIONSHIPS SECTION -->
+<section id="s-relationships" style="padding-top: 60px; padding-bottom: 40px;">
+  <div class="fadein visible">
+    <div class="sec-label">04 · Logical Design</div>
+    <div class="sec-title">Key <span>Relationships</span></div>
+    <div class="rel-list">
+      <div class="rel-row"><span class="rel-entity">FLIGHT</span><span class="rel-arrow">→</span><span class="rel-entity">ROUTE</span><span class="rel-card">N:1</span><span class="rel-desc">Each flight follows one route</span></div>
+      <div class="rel-row"><span class="rel-entity">FLIGHT</span><span class="rel-arrow">⇄</span><span class="rel-entity">CREW_MEMBER</span><span class="rel-card">M:N</span><span class="rel-desc">Via FLIGHT_CREW junction table</span></div>
+      <div class="rel-row"><span class="rel-entity">CREW_MEMBER</span><span class="rel-arrow">↺</span><span class="rel-entity">CREW_MEMBER</span><span class="rel-card">1:N</span><span class="rel-desc">Recursive — crew supervision</span></div>
+      <div class="rel-row"><span class="rel-entity">AIRCRAFT</span><span class="rel-arrow">→</span><span class="rel-entity">AIRCRAFT_MODEL</span><span class="rel-card">N:1</span><span class="rel-desc">Many aircraft share a model</span></div>
+      <div class="rel-row"><span class="rel-entity">PASSENGER</span><span class="rel-arrow">→</span><span class="rel-entity">BOOKING</span><span class="rel-card">1:N</span><span class="rel-desc">One passenger, many bookings</span></div>
+      <div class="rel-row"><span class="rel-entity">BOOKING</span><span class="rel-arrow">→</span><span class="rel-entity">TICKET</span><span class="rel-card">1:N</span><span class="rel-desc">One booking, multiple tickets</span></div>
+      <div class="rel-row"><span class="rel-entity">BOOKING</span><span class="rel-arrow">→</span><span class="rel-entity">PAYMENT</span><span class="rel-card">1:N</span><span class="rel-desc">Multiple payments per booking</span></div>
+      <div class="rel-row"><span class="rel-entity">BOOKING</span><span class="rel-arrow">⇄</span><span class="rel-entity">PROMOTION</span><span class="rel-card">M:N</span><span class="rel-desc">Booking can apply zero or more promos</span></div>
+      <div class="rel-row"><span class="rel-entity">CREW_MEMBER</span><span class="rel-arrow">→</span><span class="rel-entity">PILOT / F.A.</span><span class="rel-card">ISA</span><span class="rel-desc">Specialization with shared PK</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- RUNWAY DIVIDER -->
+<div class="runway"><div class="runway-line"></div><span class="runway-icon">✈</span><div class="runway-line"></div></div>
+
+<!-- NORMALIZATION SECTION -->
+<section id="s-normalization" style="padding-top: 60px; padding-bottom: 40px;">
+  <div class="fadein visible">
+    <div class="sec-label">05 · Normalization</div>
+    <div class="sec-title">Verified up to <span>3NF</span></div>
+    <div class="nf-steps">
+      <div class="nf-step"><div class="nf-badge">1NF</div><div class="nf-step-content"><div class="nf-step-title">First Normal Form — Atomic Values</div><div class="nf-step-text">Two violations found: <code style="color:var(--accent2)">languages</code> in FLIGHT_ATTENDANT and <code style="color:var(--accent2)">nationality</code> in PASSENGER could hold multiple values.</div><span class="nf-tag">Violation: multi-valued attributes</span><span class="nf-tag fixed">Fixed: FLIGHT_ATTENDANT_LANGUAGE &amp; PASSENGER_NATIONALITY tables</span></div></div>
+      <div class="nf-step ok"><div class="nf-badge">2NF</div><div class="nf-step-content"><div class="nf-step-title">Second Normal Form — No Partial Dependencies</div><div class="nf-step-text">All non-key attributes depend on the full composite key in every table. No violations found.</div><span class="nf-tag fixed">✓ Already satisfied</span></div></div>
+      <div class="nf-step"><div class="nf-badge">3NF</div><div class="nf-step-content"><div class="nf-step-title">Third Normal Form — No Transitive Dependencies</div><div class="nf-step-text">Three issues resolved: <code style="color:var(--accent2)">payment_status</code> removed from BOOKING (moved to PAYMENT). AIRCRAFT split to isolate model attributes. LOYALTY_ACCOUNT tier logic extracted into LOYALTY_TIER table.</div><span class="nf-tag">3 transitive dependencies removed</span><span class="nf-tag fixed">Fixed: AIRCRAFT_MODEL, LOYALTY_TIER, PAYMENT restructured</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- RUNWAY DIVIDER -->
+<div class="runway"><div class="runway-line"></div><span class="runway-icon">✈</span><div class="runway-line"></div></div>
+
+<!-- CONCLUSION SECTION -->
+<section id="s-conclusion" style="min-height: auto; padding-top: 60px; padding-bottom: 60px;">
+  <div class="fadein">
+    <div class="sec-label">06 · Conclusion</div>
+    <div class="sec-title">What we <span>achieved</span></div>
+    <div class="conclusion-cards">
+      <div class="conclusion-card">
+        <div class="emoji">🗄️</div>
+        <h3>Clean &amp; Normalized</h3>
+        <p>Our database follows 3NF rules. No duplicate data, no update problems. Everything is stored once in the right place.</p>
+      </div>
+      <div class="conclusion-card">
+        <div class="emoji">🔗</div>
+        <h3>Real Relationships</h3>
+        <p>All business rules are enforced: flights need crew, bookings have payments, passengers collect loyalty points.</p>
+      </div>
+      <div class="conclusion-card">
+        <div class="emoji">🚀</div>
+        <h3>Ready to Use</h3>
+        <p>This design can be implemented in any relational database (MySQL, PostgreSQL, etc.). It is scalable and easy to maintain.</p>
+      </div>
+    </div>
+    <p style="text-align: center; margin-top: 40px; font-size: 14px; color: var(--accent); border-top: 1px dashed rgba(0,200,255,0.3); padding-top: 30px;">
+      ✈ Thank you for your attention ✈
+    </p>
+  </div>
+</section>
+
+<!-- RUNWAY DIVIDER (before footer) -->
+<div class="runway"><div class="runway-line"></div><span class="runway-icon">✈</span><div class="runway-line"></div></div>
+
+<!-- FOOTER -->
+<div class="footer-bar">
+  Higher Institute of Digital Engineering of Tunis &nbsp;·&nbsp; Academic Year 2025/2026 &nbsp;·&nbsp; Groups 1PI
+</div>
+
+<script>
+  // Generate QR code for the current page URL (dynamic)
+  new QRCode(document.getElementById("qrcode"), {
+    text: window.location.href,
+    width: 100,
+    height: 100,
+    colorDark: "#00c8ff",
+    colorLight: "#0a0f1e",
+    correctLevel: QRCode.CorrectLevel.M
+  });
+
+  // Intersection Observer for fade-in animations
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fadein').forEach(el => observer.observe(el));
+</script>
+
+
+</body></html>
